@@ -37,6 +37,11 @@ class FriendDetailsViewController: UIViewController, Showable {
         scrollView.alwaysBounceHorizontal = false
         imagePicker = ImagePicker(presentationController: self, delegate: self)
         checkCameraAccess()
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configureKeybordObserver()
     }
     private func configureScreenData() {
         nameTextField.delegate = self
@@ -51,6 +56,10 @@ class FriendDetailsViewController: UIViewController, Showable {
         emailTextField.text = friend.email
         phoneTextField.text = friend.phone
     }
+    private func configureKeybordObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
     func initializeHideKeyboard() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(
             target: self,
@@ -61,7 +70,20 @@ class FriendDetailsViewController: UIViewController, Showable {
     @objc func dismissMyKeyboard() {
         view.endEditing(true)
     }
-
+    @objc func handleKeyboardNotification(_ notification: Notification) {
+        
+        if let userInfo = notification.userInfo {
+            
+            let isKeyboardShowing = notification.name == UIResponder.keyboardWillShowNotification
+            
+            isKeyboardShowing ? (navigationItem.rightBarButtonItem?.isEnabled = false) : (navigationItem.rightBarButtonItem?.isEnabled = true)
+            
+            UIView.animate(withDuration: 0.5, animations: { () -> Void in
+                self.view.layoutIfNeeded()
+            })
+        }
+    }
+    
     private func configureNavigationBar() {
         title = Constants.detailsFriendTitle
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneAction))
@@ -98,7 +120,7 @@ class FriendDetailsViewController: UIViewController, Showable {
     }
     @IBAction func changePhotoAction(_ sender: UIButton) {
         guard !nameTextField.isFirstResponder else { return }
-       changeAvatarAction()
+        changeAvatarAction()
     }
     private func changeAvatarAction(){
         self.imagePicker.present()
@@ -140,7 +162,7 @@ class FriendDetailsViewController: UIViewController, Showable {
         case nameTextField:
             predicateTest = NSPredicate(format: "SELF MATCHES %@", "^([a-zA-Z]{2,}\\s[a-zA-Z]{1,}’?-?`?'?[a-zA-Z]{1,}\\s?([a-zA-Z ]{1,})?)")
         case phoneTextField:
-                predicateTest = NSPredicate(format: "SELF MATCHES %@", "^([0-9-)( ]*)?$")
+            predicateTest = NSPredicate(format: "SELF MATCHES %@", "^([0-9-)( ]*)?$")
         default:
             break
         }
@@ -180,7 +202,7 @@ extension FriendDetailsViewController: UITextFieldDelegate {
             if let text = textField.text, text.count >= 14, range.location != 13 {
                 return false
             }
-           
+            
             return true
             
         }  else {
@@ -202,21 +224,21 @@ extension FriendDetailsViewController: UITextFieldDelegate {
             } else {
                 navigationItem.rightBarButtonItem?.isEnabled = false
             }
-                return true
-            } else {
-                navigationItem.rightBarButtonItem?.isEnabled = false
-                switch textField {
-                case phoneTextField:
-                    phoneLabelError.isHidden = false
-                case emailTextField:
-                    emailLabelError.isHidden = false
-                case nameTextField:
-                    nameLabelError.isHidden = false
-                default:
-                    break
-                }
-               
+            return true
+        } else {
+            navigationItem.rightBarButtonItem?.isEnabled = false
+            switch textField {
+            case phoneTextField:
+                phoneLabelError.isHidden = false
+            case emailTextField:
+                emailLabelError.isHidden = false
+            case nameTextField:
+                nameLabelError.isHidden = false
+            default:
+                break
             }
+            
+        }
         
         return true
     }
