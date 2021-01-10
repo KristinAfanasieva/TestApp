@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="friendCell" rowHeight="82" id="fvQ-u9-71U" customClass="FriendCell" customModule="Test_App" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fvQ-u9-71U" id="hRv-kP-eU7">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bBH-ce-T5j">
+                        <rect key="frame" x="20" y="10" width="60" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="bhJ-2g-nW7"/>
+                            <constraint firstAttribute="height" constant="60" id="lta-p5-ZtT"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DLh-y7-PIg">
+                        <rect key="frame" x="100" y="10" width="294" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" red="1" green="0.96862745100000003" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="bBH-ce-T5j" secondAttribute="bottom" constant="10" id="1BW-30-GBb"/>
+                    <constraint firstItem="DLh-y7-PIg" firstAttribute="top" secondItem="hRv-kP-eU7" secondAttribute="top" constant="10" id="O58-2u-VCH"/>
+                    <constraint firstAttribute="trailing" secondItem="DLh-y7-PIg" secondAttribute="trailing" constant="20" id="YYY-ZX-5cA"/>
+                    <constraint firstItem="bBH-ce-T5j" firstAttribute="leading" secondItem="hRv-kP-eU7" secondAttribute="leading" constant="20" id="ety-7o-PGA"/>
+                    <constraint firstItem="bBH-ce-T5j" firstAttribute="top" secondItem="hRv-kP-eU7" secondAttribute="top" constant="10" id="iTa-KM-a2f"/>
+                    <constraint firstItem="DLh-y7-PIg" firstAttribute="leading" secondItem="bBH-ce-T5j" secondAttribute="trailing" constant="20" id="vu7-0f-3Er"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="userImage" destination="bBH-ce-T5j" id="BZw-CA-E7V"/>
+                <outlet property="userNameLabel" destination="DLh-y7-PIg" id="jn9-r0-BBd"/>
+            </connections>
+            <point key="canvasLocation" x="-113.04347826086958" y="44.196428571428569"/>
+        </tableViewCell>
+    </objects>
+</document>
